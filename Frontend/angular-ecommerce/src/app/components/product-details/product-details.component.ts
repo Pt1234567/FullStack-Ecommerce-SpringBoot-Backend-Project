@@ -30,7 +30,7 @@ export class ProductDetailsComponent implements OnInit {
 
        this.productService.getProduct(theProductId).subscribe(
          data=>{
-          this.product=data;
+           this.product=data;
          } 
       )
   }
