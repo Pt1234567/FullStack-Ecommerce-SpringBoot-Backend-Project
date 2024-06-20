@@ -304,8 +304,7 @@
 
                                                 <div *ngIf="creditCardNameOnCard!.invalid && (creditCardNameOnCard!.dirty || creditCardNameOnCard!.touched)"
                                                 class="alert alert-danger mt-1">
-                                                <div
-                                                      *ngIf="creditCardNameOnCard!.errors?.['required'] || creditCardNameOnCard!.errors?.['notOnlyWhitespace']">
+                                                <div *ngIf="creditCardNameOnCard!.errors?.['required'] || creditCardNameOnCard!.errors?.['notOnlyWhitespace']">
                                                       Card Name is required</div>
                                               </div>
 
