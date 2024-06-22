@@ -3,7 +3,7 @@ package com.prash.ecommerce.dto;
 import com.prash.ecommerce.entity.Address;
 import com.prash.ecommerce.entity.Customer;
 import com.prash.ecommerce.entity.OrderItem;
-import com.prash.ecommerce.entity.Orders;
+import com.prash.ecommerce.entity.Order;
 import lombok.Data;
 
 import java.util.Set;
@@ -14,6 +14,6 @@ public class Purchase {
     private Customer customer;
     private Address shippingAddress;
     private Address billingAddress;
-    private Orders orders;
+    private Order orders;
     private Set<OrderItem> orderItems;
 }

@@ -1,7 +1,6 @@
 package com.prash.ecommerce.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Order;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,9 +28,9 @@ public class Customer {
     private String email;
 
     @OneToMany(mappedBy = "customer" ,cascade = CascadeType.ALL)
-    private Set<Orders> orders=new HashSet<>();
+    private Set<Order> orders=new HashSet<>();
 
-    public void add(Orders order){
+    public void add(Order order){
 
         if(order!=null){
             if(orders==null){

@@ -32,5 +32,5 @@ public class Address {
 
     @OneToOne
     @PrimaryKeyJoinColumn
-    private Orders order;
+    private Order order;
 }

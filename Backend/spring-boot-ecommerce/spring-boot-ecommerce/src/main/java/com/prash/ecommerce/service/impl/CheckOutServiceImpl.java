@@ -5,7 +5,7 @@ import com.prash.ecommerce.dto.Purchase;
 import com.prash.ecommerce.dto.PurchaseResponse;
 import com.prash.ecommerce.entity.Customer;
 import com.prash.ecommerce.entity.OrderItem;
-import com.prash.ecommerce.entity.Orders;
+import com.prash.ecommerce.entity.Order;
 import com.prash.ecommerce.service.CheckOutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class CheckOutServiceImpl implements CheckOutService {
     public PurchaseResponse placeOrder(Purchase purchase) {
 
         //retrieve order info from dto
-        Orders order=purchase.getOrders();
+        Order order=purchase.getOrders();
 
         //generate tracking number
         String orderTrackingNumber=generateOrderTrackingNumber();
@@ -45,6 +45,16 @@ public class CheckOutServiceImpl implements CheckOutService {
 
         //populate customer with order
         Customer customer=purchase.getCustomer();
+
+        //check if this is an existing customer
+        String email=customer.getEmail();
+
+        Customer customerFromDB=customerRepository.findByEmail(email);
+
+        if(customerFromDB!=null){
+            customer=customerFromDB;
+        }
+
         customer.add(order);
 
         //save to database

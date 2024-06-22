@@ -2,7 +2,6 @@ package com.prash.ecommerce.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,7 +14,7 @@ import java.util.Set;
 @Table(name="orders")
 @Getter
 @Setter
-public class Orders {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

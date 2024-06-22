@@ -1,0 +1,20 @@
+<h3>Your Orders</h3>
+<div *ngIf="orderHistory.length > 0">
+      <table class="table table-bordered  mt-5">
+            <tr>
+                  <th width="20%">Order Tracking Number</th>
+                  <th width="10%">Total price</th>
+                  <th width="10%">Total Quantity</th>
+                  <th width="10%">Date Created</th>
+            </tr>
+
+            <tr *ngFor="let tempOrder of orderHistory">
+                   
+                      <td>{{tempOrder.orderTrackingNumber}}</td>
+                      <td>{{tempOrder.totalPrice | currency:'USD'}}</td>
+                      <td>{{tempOrder.totalQuantity}}</td>
+                      <td>{{tempOrder.dateCreated | date:'medium'}}</td>
+
+            </tr>
+      </table>
+</div>

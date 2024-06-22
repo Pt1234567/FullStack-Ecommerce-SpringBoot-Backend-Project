@@ -1,12 +1,10 @@
 package com.prash.ecommerce.config;
 
-import com.prash.ecommerce.entity.Country;
-import com.prash.ecommerce.entity.Product;
-import com.prash.ecommerce.entity.ProductCategory;
-import com.prash.ecommerce.entity.State;
+import com.prash.ecommerce.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -21,7 +19,8 @@ import java.util.Set;
 public class MyDataRestConfig implements RepositoryRestConfigurer {
 
 
-
+    @Value("${allowed.origins}")
+    private  String[] theAllowedOrigins;
     private EntityManager entityManager;
 
     @Autowired
@@ -32,16 +31,18 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
 
-        HttpMethod[] theUnSupportedActions={HttpMethod.POST,HttpMethod.POST,HttpMethod.DELETE};
+        HttpMethod[] theUnSupportedActions={HttpMethod.POST,HttpMethod.POST,HttpMethod.DELETE,HttpMethod.PATCH};
 
         //disable http methods for put post and delete
         disableHttpMethods(Product.class,config, theUnSupportedActions);
         disableHttpMethods(ProductCategory.class,config, theUnSupportedActions);
         disableHttpMethods(Country.class,config, theUnSupportedActions);
         disableHttpMethods(State.class,config, theUnSupportedActions);
+        disableHttpMethods(Order.class,config,theUnSupportedActions);
 
         //call an internal helper method
         esposeIds(config);
+        cors.addMapping(config.getBasePath()+"/**").allowedOrigins(theAllowedOrigins);
     }
 
     private static void disableHttpMethods(Class theClass,RepositoryRestConfiguration config, HttpMethod[] theUnSupportedActions) {

@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
             redirectUri:myAppConfig.oidc.redirectUri,
             authParams:{
               pkce:true,
-              ignoreLifetime: true,
+              maxClockSkew:900,
               issuer:myAppConfig.oidc.issuer,
               scopes:myAppConfig.oidc.scopes
             }
@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
           },
 
           (error:any)=>{
+            console.error('Okta sign-in widget error:', error);
             throw error;
           }
         );
